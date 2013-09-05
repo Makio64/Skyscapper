@@ -44,19 +44,29 @@ class Main
 		@city = new City(@scene)
 
 		$("#paris").click(()=>
+			# $("body").removeClass()
+			# $("body").addClass("paris")
 			@city.updateHeight(@city.paris)
 		)
 		$("#hk").click(()=>
+			# $("body").removeClass()
+			# $("body").addClass("hk")
 			@city.updateHeight(@city.hk)
 		)
 		$("#ny").click(()=>
+			# $("body").removeClass()
+			# $("body").addClass("ny")
 			@city.updateHeight(@city.ny)
 		)
 		$("#tokyo").click(()=>
+			# $("body").removeClass()
+			# $("body").addClass("tokyo")
 			@city.updateHeight(@city.tokyo)
 		)
 		$("#dubay").click(()=>
 			@city.updateHeight(@city.dubay)
+			# $("body").removeClass()
+			# $("body").addClass("dubai")
 		)
 
 		requestAnimFrame( @animate )
