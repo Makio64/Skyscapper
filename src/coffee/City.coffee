@@ -17,7 +17,6 @@ class City
 	constructor:(@scene)->
 
 		@global3D = new THREE.Object3D()
-		@global3D.add()
 
 		ambient = new THREE.AmbientLight( 0x303030 );
 		@scene.add( ambient );
@@ -37,14 +36,14 @@ class City
 		# 	clouds.push(cloud)
 		# 	scene.add(cloud)
 		
-		@hk 		= [{heigth: 450,count:1,color:0x700000},	{heigth: 400,count:1,color:0x434B6E}, {heigth: 350,count:4,color:0x57596B},	{heigth: 300,count:6,color:0x645666},	{heigth: 250,count:15,color:0x2B2C36},	{heigth: 200,count:62,color:0xFF00FF},{heigth: 150,count:294,color:0xFFFF00}]
-		@ny	 		= [{heigth: 500,count:1,color:0x7381C7}, {heigth: 450,count:1,color:0x797E99},	{heigth: 400,count:1,color:0x67739E}, {heigth: 350,count:2,color:0x67739E},	{heigth: 300,count:6,color:0x3F446B},	{heigth: 250,count:13,color:0x67739E},	{heigth: 200,count:59,color:0x2B3269},{heigth: 150,count:227,color:0x4A58C2}]
-		@paris		= [{heigth: 300,count:1,color:0x67739E}, {heigth: 250,count:1,color:0x67739E},	{heigth: 200,count:3,color:0xCFC5A9}, {heigth: 150,count:19,color:0x94968A} ]
-		@tokyo 		= [{heigth: 250,count:1,color:0x67739E}, {heigth: 200,count:27,color:0xFF1010}, {heigth: 150,count:125,color:0xFF4D4D}]	
-		@dubay		= [{heigth: 800,count:1,color:0x67739E}, {heigth: 700,count:1,color:0x67739E},{heigth: 600,count:1,color:0x67739E},{heigth: 500,count:1,color:0x67739E},{heigth: 450,count:1,color:0x700000},	{heigth: 400,count:2,color:0x434B6E}, {heigth: 350,count:8,color:0x57596B},	{heigth: 300,count:18,color:0x645666},	{heigth: 250,count:40,color:0x2B2C36},	{heigth: 200,count:73,color:0xFF00FF},{heigth: 150,count:153,color:0xFFFF00}]
+		@hk 		= [{idBtn:"hk", density:6544, population:7071576, name:"HongKong"}, {heigth: 450,count:1,color:0x700000},	{heigth: 400,count:1,color:0x434B6E}, {heigth: 350,count:4,color:0x57596B},	{heigth: 300,count:6,color:0x645666},	{heigth: 250,count:15,color:0x2B2C36},	{heigth: 200,count:62,color:0xFF00FF},{heigth: 150,count:294,color:0xFFFF00}]
+		@ny	 		= [{idBtn:"ny", density:10630, population:19570261, name:"New York"}, {heigth: 500,count:1,color:0x7381C7}, {heigth: 450,count:1,color:0x797E99},	{heigth: 400,count:1,color:0x67739E}, {heigth: 350,count:2,color:0x67739E},	{heigth: 300,count:6,color:0x3F446B},	{heigth: 250,count:13,color:0x67739E},	{heigth: 200,count:59,color:0x2B3269},{heigth: 150,count:227,color:0x4A58C2}]
+		@paris		= [{idBtn:"paris", density:21000, population:12161542, name:"Paris"}, {heigth: 300,count:1,color:0x67739E}, {heigth: 250,count:1,color:0x67739E},	{heigth: 200,count:3,color:0xCFC5A9}, {heigth: 150,count:19,color:0x94968A} ]
+		@tokyo 		= [{idBtn:"tokyo", density:6000, population:35000000, name:"Tokyo"}, {heigth: 250,count:1,color:0xFFFFFF}, {heigth: 200,count:27,color:0xFF1010}, {heigth: 150,count:125,color:0xFF4D4D}]	
+		@dubay		= [{idBtn:"dubay", density:463, population:2106177, name:"Dubai"}, {heigth: 800,count:1,color:0x67739E}, {heigth: 700,count:1,color:0x67739E},{heigth: 600,count:1,color:0x67739E},{heigth: 500,count:1,color:0x67739E},{heigth: 450,count:1,color:0x700000},	{heigth: 400,count:2,color:0x434B6E}, {heigth: 350,count:8,color:0x57596B},	{heigth: 300,count:18,color:0x645666},	{heigth: 250,count:40,color:0x2B2C36},	{heigth: 200,count:73,color:0xFF00FF},{heigth: 150,count:153,color:0xFFFF00}]
 		@buildings 	= []
 		
-		buildIndex  = 0
+		buildIndex  = 1
 		count 		= 0
 
 		radius 		= 0
@@ -68,7 +67,7 @@ class City
 			building = new Building(heigth,color)
 			building.updatePosition(radius,angle)
 			@buildings.push(building)
-			@scene.add(building)
+			@global3D.add(building)
 
 			k++
 			if k >= stepsPower
@@ -94,7 +93,7 @@ class City
 
 		socle = THREE.SceneUtils.createMultiMaterialObject( socleGeo, materials );
 		socle.position.y = -2
-		@scene.add( socle )
+		@global3D.add( socle )
 		socleGeo 	= new THREE.CylinderGeometry( radius/1.5, 0, 50, 30,5 )
 		socleMat 	= new THREE.MeshBasicMaterial({color:0,wireframeLinewidth:1,vertexColors: THREE.VertexColors})
 		plateform 	= new THREE.Object3D()
@@ -104,7 +103,10 @@ class City
 		]
 		socle = THREE.SceneUtils.createMultiMaterialObject( socleGeo, materials );
 		socle.position.y = -30
-		@scene.add( socle )
+		@density = new Density(@global3D)
+		@global3D.add( socle )
+
+		@scene.add(@global3D)
 
 		return
 
@@ -114,7 +116,13 @@ class City
 		return
 
 	updateHeight:(city)->
-		buildIndex  = 0
+		density = city[0].density
+		population = city[0].population
+
+		@density.remove()
+		@density = new Density(@global3D, Math.floor(population/50000), density)
+
+		buildIndex  = 1
 		count 		= 0
 
 		for i in [0..@max] by 1
@@ -133,6 +141,8 @@ class City
 			if city.length > buildIndex and count >= city[buildIndex].count
 				count = 0
 				buildIndex++
+
+		TweenLite.to( @global3D.rotation, 1.2, {y:@global3D.rotation.y+Math.PI,ease:Quad.easeOut})
 
 		return
 

@@ -8,15 +8,21 @@ class Main
 	dt 				: 0
 	lastTime 		: 0
 
+	changeTick			: 0
+	changeTickDuration 	: 600
+	citys 				: null
+	currentCity			: 0
+	switchAuto			: false
 
 	constructor:()->		
 		@lastTime = Date.now()
 
+
 		w = window.innerWidth
 		h = window.innerHeight
 
-		@camera = new THREE.PerspectiveCamera( 70, w / h )
-		@camera.position = new THREE.Vector3(190,190,190)
+		@camera = new THREE.PerspectiveCamera( 70, w / h, 0.1, 10000 )
+		@camera.position = new THREE.Vector3(0,300,700)
 		@controls = new THREE.TrackballControls( @camera );
 
 		@controls.rotateSpeed = 1.0;
@@ -35,7 +41,7 @@ class Main
 		@scene = new THREE.Scene()
 		@scene.add(@camera)
 		
-		@renderer = new THREE.WebGLRenderer()
+		@renderer = new THREE.WebGLRenderer({antialias: true})
 		@renderer.setSize(w, h)
 		# @renderer.setClearColor(0x111FF1,0)
 
@@ -43,48 +49,96 @@ class Main
 		
 		@city = new City(@scene)
 
+		@citys = [@city.ny,@city.paris,@city.hk,@city.tokyo,@city.dubay]
+
 		$("#paris").click(()=>
-			# $("body").removeClass()
-			# $("body").addClass("paris")
 			@city.updateHeight(@city.paris)
+			@select(@city.paris)
 		)
 		$("#hk").click(()=>
-			# $("body").removeClass()
-			# $("body").addClass("hk")
 			@city.updateHeight(@city.hk)
+			@select(@city.hk)
 		)
 		$("#ny").click(()=>
-			# $("body").removeClass()
-			# $("body").addClass("ny")
 			@city.updateHeight(@city.ny)
+			@select(@city.ny)
 		)
 		$("#tokyo").click(()=>
-			# $("body").removeClass()
-			# $("body").addClass("tokyo")
 			@city.updateHeight(@city.tokyo)
+			@select(@city.tokyo)
 		)
 		$("#dubay").click(()=>
 			@city.updateHeight(@city.dubay)
-			# $("body").removeClass()
-			# $("body").addClass("dubai")
+			@select(@city.dubay)
 		)
+		$("#camera1").click(()=>
+			TweenLite.to(@camera.position,1.6,{x:0,y:300,z:700,ease:Strong.easeOut})
+			TweenLite.to(@city.global3D.rotation,1.3,{y:@city.global3D.rotation.y+Math.PI,ease:Sine.easeOut})
+		)
+		$("#camera2").click(()=>
+			TweenLite.to(@camera.position,1.6,{x:0,y:600,z:0.5,ease:Strong.easeOut})
+			TweenLite.to(@city.global3D.rotation,1.3,{y:@city.global3D.rotation.y+Math.PI,ease:Sine.easeOut})
+		)
+		$("#camera3").click(()=>
+			TweenLite.to(@camera.position,1.6,{x:0,y:200,z:400,ease:Strong.easeOut})
+			TweenLite.to(@city.global3D.rotation,1.3,{y:@city.global3D.rotation.y+Math.PI,ease:Sine.easeOut})
+		)
+		$("#switchAuto").click(()=>
+			@switchAuto = !@switchAuto
+			if @switchAuto
+				$("#switchAuto a").html("on")
+				@changeTick = @changeTickDuration
+			else
+				$("#switchAuto a").html("off")
+		)
+
+		window.addEventListener("resize",@resize,false)
 
 		requestAnimFrame( @animate )
 		return
 		
 
 	animate:()=>
-		# @city.update()
-		@controls.update()
+		@city.update()
+		# @controls.update()
 		t = Date.now()
 		dt = t - @lastTime
+
+		if @switchAuto
+			@changeTick += dt
+			if @changeTick >= @changeTickDuration
+				@changeTick = 0
+				@nextCity()
+
 		@lastTime = t
 		@camera.lookAt(@scene.position)
 		@renderer.render(@scene, @camera)
 
 		requestAnimFrame( @animate )
-
 		return
+
+
+	resize:()=>
+		@camera.aspect = window.innerWidth / window.innerHeight;
+		@camera.updateProjectionMatrix();
+
+		@renderer.setSize( window.innerWidth, window.innerHeight );	
+		return
+
+
+	nextCity:()->
+		@currentCity++
+		@currentCity %= @citys.length
+		@city.updateHeight(@citys[@currentCity])
+		@select(@citys[@currentCity])
+		return
+
+
+	select:(city)->
+		$("div.city a").removeClass("selected")
+		$("div#"+city[0].idBtn+" a").addClass("selected")
+		return
+
 
 
 main = null

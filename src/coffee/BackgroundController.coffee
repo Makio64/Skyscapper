@@ -1,4 +1,0 @@
-class BackgroundController
-
-	constructor:()->
-		return

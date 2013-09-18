@@ -2,9 +2,9 @@ class Building extends THREE.Mesh
 
 	angle			: 0
 	radius			: 0
-	r 			: 0
-	g 			: 0
-	b 			: 0
+	r 				: 0
+	g 				: 0
+	b 				: 0
 
 	constructor:(h,@color)->
 		opacity = .1
@@ -47,7 +47,7 @@ class Building extends THREE.Mesh
 		# @material = new THREE.MeshLambertMaterial({color:@color, opacity:@material.opacity, transparent: true})
 		# console.log @material
 		@material.color.setRGB(@r,@g,@b)
-		@material.opacity = Math.min(Math.max(@geometry.vertices[0].y / 140,.1),.8)
+		@material.opacity = Math.min(Math.max(@geometry.vertices[0].y / 130,.1),.8)
 		@geometry.verticesNeedUpdate = true;
 		@geometry.elementsNeedUpdate = true;
 		@geometry.morphTargetsNeedUpdate = true;
