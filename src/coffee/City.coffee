@@ -36,7 +36,7 @@ class City
 		# 	clouds.push(cloud)
 		# 	scene.add(cloud)
 		
-		@hk 		= [{idBtn:"hk", density:6544, population:7071576, name:"HongKong"}, {heigth: 450,count:1,color:0x700000},	{heigth: 400,count:1,color:0x434B6E}, {heigth: 350,count:4,color:0x57596B},	{heigth: 300,count:6,color:0x645666},	{heigth: 250,count:15,color:0x2B2C36},	{heigth: 200,count:62,color:0xFF00FF},{heigth: 150,count:294,color:0xFFFF00}]
+		@hk 		= [{idBtn:"hk", density:6544, population:7071576, name:"HongKong"}, {heigth: 450,count:1,color:0xD9CEB0},	{heigth: 400,count:1,color:0x999079}, {heigth: 350,count:4,color:0x8F838C},	{heigth: 300,count:6,color:0x4F5278},	{heigth: 250,count:15,color:0x736B6A},	{heigth: 200,count:62,color:0x6B5A56},{heigth: 150,count:294,color:0x61525E}]
 		@ny	 		= [{idBtn:"ny", density:10630, population:19570261, name:"New York"}, {heigth: 500,count:1,color:0x7381C7}, {heigth: 450,count:1,color:0x797E99},	{heigth: 400,count:1,color:0x67739E}, {heigth: 350,count:2,color:0x67739E},	{heigth: 300,count:6,color:0x3F446B},	{heigth: 250,count:13,color:0x67739E},	{heigth: 200,count:59,color:0x2B3269},{heigth: 150,count:227,color:0x4A58C2}]
 		@paris		= [{idBtn:"paris", density:21000, population:12161542, name:"Paris"}, {heigth: 300,count:1,color:0x67739E}, {heigth: 250,count:1,color:0x67739E},	{heigth: 200,count:3,color:0xCFC5A9}, {heigth: 150,count:19,color:0x94968A} ]
 		@tokyo 		= [{idBtn:"tokyo", density:6000, population:35000000, name:"Tokyo"}, {heigth: 250,count:1,color:0xFFFFFF}, {heigth: 200,count:27,color:0xFF1010}, {heigth: 150,count:125,color:0xFF4D4D}]	

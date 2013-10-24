@@ -47,31 +47,31 @@
         }, {
           heigth: 450,
           count: 1,
-          color: 0x700000
+          color: 0xD9CEB0
         }, {
           heigth: 400,
           count: 1,
-          color: 0x434B6E
+          color: 0x999079
         }, {
           heigth: 350,
           count: 4,
-          color: 0x57596B
+          color: 0x8F838C
         }, {
           heigth: 300,
           count: 6,
-          color: 0x645666
+          color: 0x4F5278
         }, {
           heigth: 250,
           count: 15,
-          color: 0x2B2C36
+          color: 0x736B6A
         }, {
           heigth: 200,
           count: 62,
-          color: 0xFF00FF
+          color: 0x6B5A56
         }, {
           heigth: 150,
           count: 294,
-          color: 0xFFFF00
+          color: 0x61525E
         }
       ];
       this.ny = [
@@ -363,15 +363,7 @@
       h = window.innerHeight;
       this.camera = new THREE.PerspectiveCamera(70, w / h, 0.1, 10000);
       this.camera.position = new THREE.Vector3(0, 300, 700);
-      this.controls = new THREE.TrackballControls(this.camera);
-      this.controls.rotateSpeed = 1.0;
-      this.controls.zoomSpeed = 1.2;
-      this.controls.panSpeed = 0.8;
-      this.controls.noZoom = false;
-      this.controls.noPan = false;
-      this.controls.staticMoving = true;
-      this.controls.dynamicDampingFactor = 0.3;
-      this.controls.keys = [65, 83, 68];
+      this.cameraIndex = 0;
       this.scene = new THREE.Scene();
       this.scene.add(this.camera);
       this.renderer = new THREE.WebGLRenderer({
@@ -401,41 +393,44 @@
         _this.city.updateHeight(_this.city.dubay);
         return _this.select(_this.city.dubay);
       });
-      $("#camera1").click(function() {
-        TweenLite.to(_this.camera.position, 1.6, {
-          x: 0,
-          y: 300,
-          z: 700,
-          ease: Strong.easeOut
-        });
-        return TweenLite.to(_this.city.global3D.rotation, 1.3, {
-          y: _this.city.global3D.rotation.y + Math.PI,
-          ease: Sine.easeOut
-        });
-      });
-      $("#camera2").click(function() {
-        TweenLite.to(_this.camera.position, 1.6, {
-          x: 0,
-          y: 600,
-          z: 0.5,
-          ease: Strong.easeOut
-        });
-        return TweenLite.to(_this.city.global3D.rotation, 1.3, {
-          y: _this.city.global3D.rotation.y + Math.PI,
-          ease: Sine.easeOut
-        });
-      });
-      $("#camera3").click(function() {
-        TweenLite.to(_this.camera.position, 1.6, {
-          x: 0,
-          y: 200,
-          z: 400,
-          ease: Strong.easeOut
-        });
-        return TweenLite.to(_this.city.global3D.rotation, 1.3, {
-          y: _this.city.global3D.rotation.y + Math.PI,
-          ease: Sine.easeOut
-        });
+      $("#camera").click(function() {
+        _this.cameraIndex++;
+        _this.cameraIndex %= 3;
+        switch (_this.cameraIndex) {
+          case 0:
+            TweenLite.to(_this.camera.position, 1.6, {
+              x: 0,
+              y: 300,
+              z: 700,
+              ease: Strong.easeOut
+            });
+            return TweenLite.to(_this.city.global3D.rotation, 1.3, {
+              y: _this.city.global3D.rotation.y + Math.PI,
+              ease: Sine.easeOut
+            });
+          case 1:
+            TweenLite.to(_this.camera.position, 1.6, {
+              x: 0,
+              y: 600,
+              z: 0.5,
+              ease: Strong.easeOut
+            });
+            return TweenLite.to(_this.city.global3D.rotation, 1.3, {
+              y: _this.city.global3D.rotation.y + Math.PI,
+              ease: Sine.easeOut
+            });
+          case 2:
+            TweenLite.to(_this.camera.position, 1.6, {
+              x: 0,
+              y: 200,
+              z: 400,
+              ease: Strong.easeOut
+            });
+            return TweenLite.to(_this.city.global3D.rotation, 1.3, {
+              y: _this.city.global3D.rotation.y + Math.PI,
+              ease: Sine.easeOut
+            });
+        }
       });
       $("#switchAuto").click(function() {
         _this.switchAuto = !_this.switchAuto;

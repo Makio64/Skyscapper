@@ -23,20 +23,18 @@ class Main
 
 		@camera = new THREE.PerspectiveCamera( 70, w / h, 0.1, 10000 )
 		@camera.position = new THREE.Vector3(0,300,700)
-		@controls = new THREE.TrackballControls( @camera );
 
-		@controls.rotateSpeed = 1.0;
-		@controls.zoomSpeed = 1.2;
-		@controls.panSpeed = 0.8;
+		@cameraIndex = 0
 
-		@controls.noZoom = false;
-		@controls.noPan = false;
-
-		@controls.staticMoving = true;
-		@controls.dynamicDampingFactor = 0.3;
-
-		@controls.keys = [ 65, 83, 68 ];
-
+		# @controls = new THREE.TrackballControls( @camera );
+		# @controls.rotateSpeed = 1.0;
+		# @controls.zoomSpeed = 1.2;
+		# @controls.panSpeed = 0.8;
+		# @controls.noZoom = false;
+		# @controls.noPan = false;
+		# @controls.staticMoving = true;
+		# @controls.dynamicDampingFactor = 0.3;
+		# @controls.keys = [ 65, 83, 68 ];
 
 		@scene = new THREE.Scene()
 		@scene.add(@camera)
@@ -71,17 +69,20 @@ class Main
 			@city.updateHeight(@city.dubay)
 			@select(@city.dubay)
 		)
-		$("#camera1").click(()=>
-			TweenLite.to(@camera.position,1.6,{x:0,y:300,z:700,ease:Strong.easeOut})
-			TweenLite.to(@city.global3D.rotation,1.3,{y:@city.global3D.rotation.y+Math.PI,ease:Sine.easeOut})
-		)
-		$("#camera2").click(()=>
-			TweenLite.to(@camera.position,1.6,{x:0,y:600,z:0.5,ease:Strong.easeOut})
-			TweenLite.to(@city.global3D.rotation,1.3,{y:@city.global3D.rotation.y+Math.PI,ease:Sine.easeOut})
-		)
-		$("#camera3").click(()=>
-			TweenLite.to(@camera.position,1.6,{x:0,y:200,z:400,ease:Strong.easeOut})
-			TweenLite.to(@city.global3D.rotation,1.3,{y:@city.global3D.rotation.y+Math.PI,ease:Sine.easeOut})
+		$("#camera").click(()=>
+			@cameraIndex++
+			@cameraIndex%=3
+			switch @cameraIndex
+				when 0
+					TweenLite.to(@camera.position,1.6,{x:0,y:300,z:700,ease:Strong.easeOut})
+					TweenLite.to(@city.global3D.rotation,1.3,{y:@city.global3D.rotation.y+Math.PI,ease:Sine.easeOut})
+				when 1
+					TweenLite.to(@camera.position,1.6,{x:0,y:600,z:0.5,ease:Strong.easeOut})
+					TweenLite.to(@city.global3D.rotation,1.3,{y:@city.global3D.rotation.y+Math.PI,ease:Sine.easeOut})
+				when 2
+					TweenLite.to(@camera.position,1.6,{x:0,y:200,z:400,ease:Strong.easeOut})
+					TweenLite.to(@city.global3D.rotation,1.3,{y:@city.global3D.rotation.y+Math.PI,ease:Sine.easeOut})
+
 		)
 		$("#switchAuto").click(()=>
 			@switchAuto = !@switchAuto

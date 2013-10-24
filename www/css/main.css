@@ -296,9 +296,9 @@ body , html{
     -o-transition: all 3s linear;
     transition: all 3s linear;
     
-    font-family: "Helvetica", sans-serif;
+    font-family: 'Aldrich', 'Helvetica', sans-serif;
     font-variant: normal;
-    font-weight: 200;
+    font-weight: 400;
     font-size: 12px;
     filter: none;
     background: #111; 
@@ -312,7 +312,15 @@ body , html{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#111', endColorstr='#000000',GradientType=1 ); 
 }
 
+.group{
+    float: left;
+    width: auto;
+    overflow: auto;
+    border-right: 1px solid #444;
+}
+
 #citys {
+    opacity: 0.5;
     position:absolute;
     z-index: 10;
     top: 0;
@@ -322,7 +330,7 @@ body , html{
     /*width: 600px;*/
     /*margin-left: -300px;*/
     background: #1A1A1A;
-    border-bottom: 1px solid #444;
+    border-top: 1px solid #444;
 }
 
 #citys div{
@@ -334,7 +342,8 @@ body , html{
     /*background: #000;*/
     opacity: .7;
     padding: 15px;
-    color: #777;
+    color: #CCC;
+    text-decoration: none;
 }
 
 #citys div.city a.selected{
@@ -342,7 +351,7 @@ body , html{
 }
 
 #citys div a:hover{
-    color: #CCC;
+    color: #FFF;
 }
 
 /*
