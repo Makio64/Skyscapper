@@ -1,1 +1,0 @@
-coffee: coffee -w -j main.js -o ./www/js/ -c ./src/coffee/

@@ -1,13 +1,13 @@
-------------------------------
-Skyscapper Data visualisation
-------------------------------
+# Skyscraper Data Visualization
 
-Hello !
+[TEST ONLINE](http://makiopolis.com/skyscraper)
 
-I'm David Ronai ( @Makio64 - makiopolis.com ), creative developer.
+This data visualization include only skyscraper > 150m
 
-I start this project of data visualisation after my travel in Honk Kong where I realize how small Paris was, then I was looking on wikipedia and : "Oh god !".
+It's base on wikipedia data : https://en.wikipedia.org/wiki/List_of_cities_with_the_most_skyscrapers
 
-I was passionate by all this urban datas and especially about skyscapper then I decide to made it !
+## install & test
 
-Thanks to tweet and give me your feedback ! :)
+sudo npm i
+
+npm start
