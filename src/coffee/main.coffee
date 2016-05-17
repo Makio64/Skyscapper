@@ -23,7 +23,7 @@ class Main
 		document.querySelector("#container").appendChild(@renderer.domElement)
 
 		@city = new City(@scene)
-		@citys = [@city.ny,@city.paris,@city.hk,@city.tokyo,@city.dubay]
+		@citys = [@city.nyc,@city.paris,@city.hk,@city.tokyo,@city.seoul,@city.dubay]
 
 		document.querySelector("#paris").addEventListener("click",()=>
 			@city.updateHeight(@city.paris)
@@ -113,8 +113,6 @@ class Main
 		return
 
 	select:(city)->
-		@switchAuto = false
-		document.querySelector("#switchAuto a").innerHTML = "off"
 		divs = document.querySelectorAll("div.city a")
 		for div in divs
 			div.className = ""
