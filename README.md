@@ -1,6 +1,6 @@
 # Skyscraper Data Visualization
 
-[TEST ONLINE](http://makiopolis.com/skyscraper)
+[TEST ONLINE](http://makiopolis.com/skyscrapers/)
 
 This data visualization include only skyscraper > 150m
 
